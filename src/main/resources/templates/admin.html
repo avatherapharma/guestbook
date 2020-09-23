@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<title>GuestBookHome</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<h1>Admin Screen</h1>
+	<form action="#" th:action="@{/approveentry}" th:object="${entrylist}" method="post">
+   
+<table>
+    <thead>
+        <tr>
+            <th> entry </th>
+            <th> user </th>
+            <th> id </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="entrylist : ${entrylist}">
+            <td><span th:text="${entrylist.entry}"> entry </span></td>
+            <td><span th:text="${entrylist.user}"> user </span></td>
+            <td><span th:text="${entrylist.id}"> id </span></td>
+    </tr>
+    </tbody>
+</table>
+<p><input type="submit" value="Submit" />
+
+</form>
+</body>
+</html>
