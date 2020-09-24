@@ -11,7 +11,9 @@ public interface UserDao {
 
 	public  List<USER>  validateUser(UserModel model);	
 	public  List<USERENTRY>  alluserentrys();
+	public  boolean  addGuestEntry(UserEntry model);
 	public  boolean  approveEntry(UserEntry model);
+	
 	public  boolean  removeentry(UserEntry model);
 	
 	

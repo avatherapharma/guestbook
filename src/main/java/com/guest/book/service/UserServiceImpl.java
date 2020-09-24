@@ -2,6 +2,10 @@ package com.guest.book.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.StringJoiner;
+
+import javax.validation.ConstraintViolation;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +16,7 @@ import com.guest.book.entity.USER;
 import com.guest.book.entity.USERENTRY;
 import com.guest.book.model.UserEntry;
 import com.guest.book.model.UserModel;
+import com.guest.book.util.HibernateValidatorUtil;
 
 public class UserServiceImpl implements UserService {
 	Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -34,9 +39,37 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserEntry> pendingadminentrys() {
-List<USERENTRY> entries = userdao.alluserentrys();
+	public UserEntry addUserEntry(UserEntry model) {
+
+		StringJoiner error = new StringJoiner(":");
+		Set<ConstraintViolation<UserEntry>> constraintViolations = HibernateValidatorUtil.validatorFactory()
+				.validate(model);
+
+		if (constraintViolations.size() > 0) {
+			for (ConstraintViolation<UserEntry> violation : constraintViolations) {
+									error.add(violation.getPropertyPath() + " " + violation.getMessage());
+}
+			return model;
+		}
+		else {
+			
+			if (userdao.addGuestEntry(model)) {
+model.setStatus("success");
+				return model;
+			}
+			else
+			{
+				model.setStatus("failure");
+				return model;
+			}
+		}
 		
+	}
+
+	@Override
+	public List<UserEntry> pendingadminentrys() {
+		List<USERENTRY> entries = userdao.alluserentrys();
+
 		List<UserEntry> list = new ArrayList<>();
 		entries.stream().forEach(a -> {
 			UserEntry entry = new UserEntry();
@@ -52,14 +85,14 @@ List<USERENTRY> entries = userdao.alluserentrys();
 	@Override
 	public boolean approveEntry(UserEntry model) {
 
-	return userdao.approveEntry(model);
+		return userdao.approveEntry(model);
 
 	}
 
 	@Override
 	public boolean removeEntry(UserEntry model) {
-	
-	return userdao.removeentry(model);
-}
+
+		return userdao.removeentry(model);
+	}
 
 }

@@ -1,5 +1,6 @@
 package com.guest.book.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,36 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
+	
+	@Override
+	public boolean addGuestEntry(UserEntry model) {
+	
+		boolean result=false;
+		Session session = null;
+		try {
+
+			session = sessionFactory.openSession();
+
+			session.beginTransaction();
+			USERENTRY entry = new USERENTRY() ;
+			
+			entry.setENTRY(model.getEntry());
+			entry.setID(model.getId());
+			entry.setUSER(model.getUser());
+			entry.setSTATUS("pending");
+			session.save(entry  );
+			session.getTransaction().commit();
+		result=true;
+		} catch (Exception e) {
+			result=false;
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return result;
+	}
+	
 	@Override
 	public List<USERENTRY> alluserentrys() {
 		Session session = null;
@@ -124,5 +155,7 @@ public class UserDaoImpl implements UserDao {
 		}
 		return updatestatus;
 	}
+
+	
 
 }

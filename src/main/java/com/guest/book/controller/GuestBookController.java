@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,71 +44,84 @@ public class GuestBookController {
 
 	}
 
-	@PostMapping("/login")
-	public String submitForm(@ModelAttribute UserModel user, Model model) {
-		logger.info("login ");
+	@PostMapping("/memberLogin")
+	public String memberLogin(@ModelAttribute UserModel user, Model model) {
+		logger.info("memberLogin ");
 		model.addAttribute("user", userServ.validateUser(user));
-		logger.info("login End");
-	
-		if (user.getRole()=="user") {
+
+		if (user.getRole().equals("guest")) {
+			logger.info("memberLogin End");
+			UserEntry usernetry = new UserEntry();
+			model.addAttribute("userEntry", usernetry);
 			return "user.html";
-		}
-		else {
-			
+
+		} else {
+
 			model.addAttribute("entrylist", userServ.pendingadminentrys());
+
+			model.addAttribute("selectedID",new ArrayList<String>() );
+			logger.info("memberLogin End");
+
 			return "admin.html";
 		}
-	
+
 	}
 
-	
 	@PostMapping("/approveentry")
-	public String approveEntrys(@ModelAttribute UserEntry entry, Model model) {
+	public String adminApproveEntrys(@ModelAttribute UserEntry entry,ArrayList<String> selectedID, Model model) {
 		logger.info("approve ");
 		model.addAttribute("user", userServ.approveEntry(entry));
 		logger.info("approve End");
 		return "admin.html";
 	}
 
+    
 	
 	@PostMapping("/removeEntrys")
 	public String removeEntries(@ModelAttribute UserEntry entry, Model model) {
 		logger.info("removeEntrys ");
-				model.addAttribute("user", userServ.removeEntry(entry));
+		model.addAttribute("user", userServ.removeEntry(entry));
 		logger.info("removeEntrys End");
 		return "admin.html";
 	}
 
-	
-	
+	@PostMapping("/guestEntrySubmit")
+	public String guestAddEntry(@ModelAttribute UserEntry userEntry, UserModel user, Model model) {
+		logger.info("guestAddEntry ");
+		userEntry.setUser(user.getUserName());
+		model.addAttribute("userEntry", userServ.addUserEntry(userEntry));
+		logger.info("guestAddEntry End");
+		return "user.html";
+	}
+
 	@PostMapping("/upload")
-    public String uploadFile(@RequestParam("file") MultipartFile file, Model model, RedirectAttributes attributes,UserData data) {
-		
-        // check if file is empty
-        if (file.isEmpty()) {
-            attributes.addFlashAttribute("message", "Please select a file to upload.");
-            return "redirect:/";
-        }
+	public String uploadFile(@RequestParam("file") MultipartFile file, Model model, RedirectAttributes attributes,
+			UserData data) {
 
-        // normalize the file path
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		// check if file is empty
+		if (file.isEmpty()) {
+			attributes.addFlashAttribute("message", "Please select a file to upload.");
+			return "redirect:/";
+		}
 
-        // save the file on the local file system
-        try {
-            Path path = Paths.get(UPLOAD_DIR + fileName);
-            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		// normalize the file path
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+		// save the file on the local file system
+		try {
+			Path path = Paths.get(UPLOAD_DIR + fileName);
+			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		// return success response
-        attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
-    data.setImageStatus("success");
-  	data.setStatus("success");
-    model.addAttribute("user", data);
-	
-return "user.html";
-    }
+		attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
+		data.setImageStatus("success");
+		data.setStatus("success");
+		model.addAttribute("user", data);
 
-	
+		return "user.html";
+	}
+
 }

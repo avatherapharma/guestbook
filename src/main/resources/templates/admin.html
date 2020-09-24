@@ -7,8 +7,10 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-	<h1>Admin Screen</h1>
-	<form action="#" th:action="@{/approveentry}" th:object="${entrylist}" method="post">
+
+
+	<h1><span th:text="#{msg.AdminPage}" /></h1>
+	<form action="#" th:action="@{/approveentry}" th:object="${selectedID}" method="post">
    
 <table>
     <thead>
@@ -22,8 +24,11 @@
         <tr th:each="entrylist : ${entrylist}">
             <td><span th:text="${entrylist.entry}"> entry </span></td>
             <td><span th:text="${entrylist.user}"> user </span></td>
+
             <td><span th:text="${entrylist.id}"> id </span></td>
-    </tr>
+                
+  
+     </tr>
     </tbody>
 </table>
 <p><input type="submit" value="Submit" />
