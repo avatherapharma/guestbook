@@ -17,7 +17,7 @@
 }
 </style>
 
-<title>GuestBook Login Page</title>
+<title>GuestBook Register Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -47,23 +47,23 @@
 		<div class="row justify-content-sm-center">
 			<div class="col-sm-10 col-md-6">
 				<div class="card border-info">
-					<div class="card-header">Sign in to continue</div>
+					<div class="card-header">register</div>
 					<div class="card-body">
 						<div class="row">
-							<div class="col-md-4 text-center">
-								<h4 class="text-center">iMAGE</h4>
-							</div>
+							<div class="col-md-4 text-center"></div>
 							<div class="col-md-8">
-								<form action="#" th:action="@{/memberLogin}" th:object="${user}"
-									method="post">
-									<div class="row">
-										<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 ">
+								<form action="#" th:action="@{/memberRegister}"
+									th:object="${user}" method="post">
+									<div class="row"`>
+										<div class="form-group col-lg-6 col-md-6 col-sm-5 col-xs-12 " >
 
-											<input type="text" class="form-control mb-2"
-												placeholder="userID" th:field="*{userName}" required
+										<input type="text" class="form-control mb-2" 
+												placeholder="userID" th:field="*{userName}" title="Name" required
 												autofocus>
 										</div>
-										<div class="col-lg-6 col-md-6 col-sm-5 col-xs-12 ">
+										</div>
+											<div class="row">
+										<div class="form-group col-lg-6 col-md-6 col-sm-5 col-xs-12 ">
 											<input type="password" class="form-control mb-2"
 												placeholder="Password" th:field="*{password}">
 										</div>
@@ -74,10 +74,8 @@
 										<option th:value="'admin'" th:text="admin"></option>
 									</select>
 									<button class="btn btn-lg btn-dark btn-block mb-1"
-										type="submit">Sign in</button>
-									<label class="checkbox float-left"> <input
-										type="checkbox" value="remember-me"> Remember me
-									</label> <a href="#" class="float-right">Need help?</a>
+										type="submit">Register User</button>
+
 								</form>
 							</div>
 						</div>
@@ -85,9 +83,7 @@
 				</div>
 				<form action="#" th:action="@{/memberRegisterNew}"
 					th:object="${user}" method="post">
-
-					<button class="btn btn-lg btn-dark btn-block mb-1" type="submit">Register
-						User</button>
+					<a href="#" class="float-right">Register User </a>
 				</form>
 			</div>
 		</div>

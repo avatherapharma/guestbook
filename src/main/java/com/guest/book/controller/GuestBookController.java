@@ -44,6 +44,23 @@ public class GuestBookController {
 
 	}
 
+	@RequestMapping(path = "/memberRegisterNew")
+	public String memberRegisterNew(Model model) {
+		logger.info("index");
+		model.addAttribute("user", new UserModel());
+		return "register";
+
+	}
+
+
+	@RequestMapping(path = "/memberRegister")
+	public String memberRegister(@ModelAttribute UserModel user,Model model) {
+		logger.info("index");
+		model.addAttribute("user", new UserModel());
+		return "index";
+
+	}
+
 	@PostMapping("/memberLogin")
 	public String memberLogin(@ModelAttribute UserModel user, Model model) {
 		logger.info("memberLogin ");
