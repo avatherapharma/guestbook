@@ -8,14 +8,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.guest.book.dao.UserDao;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
- @Autowired
- UserDao dao;
-    // [...] 
+ 
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) 
       throws Exception {
@@ -25,7 +22,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
           .and()
           .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
     }
- 
     
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
