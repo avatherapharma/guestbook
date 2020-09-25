@@ -48,6 +48,17 @@ user.setStatus("success");
 
 	}
 
+
+	@RequestMapping(path = "/logout")
+	public String logout(Model model) {
+		logger.info("lohgout");
+		UserModel user=  new UserModel();
+user.setStatus("success");
+		model.addAttribute("user", user);
+		return "index";
+
+	}
+
 	@RequestMapping(path = "/memberRegisterNew")
 	public String memberRegisterNew(Model model) {
 		logger.info("index");
