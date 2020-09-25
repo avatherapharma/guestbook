@@ -55,9 +55,11 @@ public class GuestBookController {
 
 	@RequestMapping(path = "/memberRegister")
 	public String memberRegister(@ModelAttribute UserModel user,Model model) {
+		
 		logger.info("index");
-		model.addAttribute("user", new UserModel());
-		return "index";
+		
+		model.addAttribute("user", userServ.addNewUSer(user));
+		return "registerSuccess";
 
 	}
 
@@ -66,20 +68,23 @@ public class GuestBookController {
 		logger.info("memberLogin ");
 		model.addAttribute("user", userServ.validateUser(user));
 
-		if (user.getRole().equals("guest")) {
+		if (user.getRole().equals("guest")&&user.getStatus().equals("success")) {
 			logger.info("memberLogin End");
 			UserEntry usernetry = new UserEntry();
 			model.addAttribute("userEntry", usernetry);
 			return "user.html";
 
-		} else {
+		}  else if (user.getRole().equals("admin")&&user.getStatus().equals("success")) {
 
 			model.addAttribute("entrylist", userServ.pendingadminentrys());
 
-			model.addAttribute("selectedID",new ArrayList<String>() );
 			logger.info("memberLogin End");
 
 			return "admin.html";
+		}
+		else {
+			model.addAttribute("user", user);
+			return "index.html";
 		}
 
 	}

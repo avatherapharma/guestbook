@@ -39,11 +39,11 @@ public class UserDaoImpl implements UserDao {
 			crit.add(Restrictions.ilike("USERNAME", model.getUserName()));
 			crit.add(Restrictions.ilike("PASSWORD", model.getPassword()));
 			crit.add(Restrictions.ilike("ROLE", model.getRole()));
+			crit.add(Restrictions.ilike("STATUS","active"));
 
 			result = crit.list();
 		} catch (Exception e) {
 			e.printStackTrace();
-			// TODO: handle exception
 		} finally {
 			session.close();
 		}
@@ -51,28 +51,27 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
-	
 	@Override
 	public boolean addGuestEntry(UserEntry model) {
-	
-		boolean result=false;
+
+		boolean result = false;
 		Session session = null;
 		try {
 
 			session = sessionFactory.openSession();
 
 			session.beginTransaction();
-			USERENTRY entry = new USERENTRY() ;
-			
+			USERENTRY entry = new USERENTRY();
+
 			entry.setENTRY(model.getEntry());
 			entry.setID(model.getId());
 			entry.setUSER(model.getUser());
 			entry.setSTATUS("pending");
-			session.save(entry  );
+			session.save(entry);
 			session.getTransaction().commit();
-		result=true;
+			result = true;
 		} catch (Exception e) {
-			result=false;
+			result = false;
 			e.printStackTrace();
 		} finally {
 			session.close();
@@ -80,7 +79,7 @@ public class UserDaoImpl implements UserDao {
 
 		return result;
 	}
-	
+
 	@Override
 	public List<USERENTRY> alluserentrys() {
 		Session session = null;
@@ -118,7 +117,7 @@ public class UserDaoImpl implements UserDao {
 			criteriaUpdate.set("STATUS", "approved");
 
 			criteriaUpdate.where(cb.equal(root.get("ID"), model.getId()));
-			
+
 			Transaction transaction = session.beginTransaction();
 			session.createQuery(criteriaUpdate).executeUpdate();
 			transaction.commit();
@@ -156,6 +155,35 @@ public class UserDaoImpl implements UserDao {
 		return updatestatus;
 	}
 
-	
+	@Override
+	public boolean addNewUserUser(UserModel model) {
+
+		boolean result = false;
+		Session session = null;
+		try {
+
+			session = sessionFactory.openSession();
+
+			session.beginTransaction();
+			USER entry = new USER();
+
+			entry.setADDRESS(model.getAddress());
+			entry.setMOBILE(model.getMobileNo());
+			entry.setNAME(model.getName());
+			entry.setPASSWORD(model.getPassword());
+			entry.setROLE(model.getRole());
+			entry.setUSERNAME(model.getUserName());
+			entry.setSTATUS("pending");
+			session.save(entry);
+			session.getTransaction().commit();
+			result = true;
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+return result;
+	}
 
 }

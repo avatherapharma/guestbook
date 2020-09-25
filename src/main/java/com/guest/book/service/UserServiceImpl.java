@@ -95,4 +95,17 @@ model.setStatus("success");
 		return userdao.removeentry(model);
 	}
 
+	@Override
+	public UserModel addNewUSer(UserModel model) {
+		if (userdao.addNewUserUser(model)) {
+model.setStatus("success");
+			return model;
+		}
+		else
+		{
+			model.setStatus("failure");
+			return model;
+		}
+	}
+
 }

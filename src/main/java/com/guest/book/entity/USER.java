@@ -12,6 +12,10 @@ public class USER {
 	private String USERNAME;
 	private String PASSWORD;
 	private String ROLE;
+	private String NAME;
+	private String MOBILE;
+	private String ADDRESS;
+	private String STATUS;
 	public String getUSERNAME() {
 		return USERNAME;
 	}
@@ -29,5 +33,29 @@ public class USER {
 	}
 	public void setROLE(String rOLE) {
 		ROLE = rOLE;
+	}
+	public String getNAME() {
+		return NAME;
+	}
+	public void setNAME(String nAME) {
+		NAME = nAME;
+	}
+	public String getMOBILE() {
+		return MOBILE;
+	}
+	public void setMOBILE(String mOBILE) {
+		MOBILE = mOBILE;
+	}
+	public String getADDRESS() {
+		return ADDRESS;
+	}
+	public void setADDRESS(String aDDRESS) {
+		ADDRESS = aDDRESS;
+	}
+	public String getSTATUS() {
+		return STATUS;
+	}
+	public void setSTATUS(String sTATUS) {
+		STATUS = sTATUS;
 	}
 }

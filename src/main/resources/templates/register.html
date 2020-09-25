@@ -54,28 +54,58 @@
 							<div class="col-md-8">
 								<form action="#" th:action="@{/memberRegister}"
 									th:object="${user}" method="post">
-									<div class="row"`>
-										<div class="form-group col-lg-6 col-md-6 col-sm-5 col-xs-12 " >
-
-										<input type="text" class="form-control mb-2" 
-												placeholder="userID" th:field="*{userName}" title="Name" required
-												autofocus>
-										</div>
-										</div>
-											<div class="row">
+									<div class="row">
+										<label class="mb-1">Name: </label>
 										<div class="form-group col-lg-6 col-md-6 col-sm-5 col-xs-12 ">
-											<input type="password" class="form-control mb-2"
-												placeholder="Password" th:field="*{password}">
+
+											<input type="text" class="form-control mb-1"
+												th:field="*{name}" title="Name" required autofocus>
 										</div>
 									</div>
-									<select class="browser-default custom-select"
-										th:field="*{role}">
-										<option th:value="'guest'" th:text="guest" selected></option>
-										<option th:value="'admin'" th:text="admin"></option>
-									</select>
+									<div class="row">
+										<label class="mb-1">MobileNo:</label>
+										<div class="form-group col-lg-6 col-md-6 col-sm-5 col-xs-12 ">
+											<input type="text" class="form-control mb-2"
+												th:field="*{mobileNo}">
+										</div>
+									</div>
+
+									<div class="row">
+										<label class="mb-1">UserName:</label>
+										<div class="form-group col-lg-6 col-md-6 col-sm-5 col-xs-12 ">
+											<input type="text" class="form-control mb-2"
+												th:field="*{userName}">
+										</div>
+									</div>
+
+									<div class="row">
+										<label class="mb-1">Address: </label>
+										<div class="form-group col-lg-6 col-md-6 col-sm-5 col-xs-12 ">
+											<input type="text" class="form-control mb-2"
+												th:field="*{address}">
+										</div>
+									</div>
+
+
+									<div class="row">
+										<label class="mb-1">Pasword: </label>
+										<div class="form-group col-lg-6 col-md-6 col-sm-5 col-xs-12 ">
+											<input type="password" class="form-control mb-2"
+												th:field="*{password}">
+										</div>
+									</div>
+									<div class="row">
+										<label class="mb-1">Role: </label>
+										<div class="form-group col-lg-6 col-md-6 col-sm-5 col-xs-12 ">
+											<select class="browser-default custom-select"
+												th:field="*{role}">
+												<option th:value="'guest'" th:text="guest" selected></option>
+												<option th:value="'admin'" th:text="admin"></option>
+											</select>
+										</div>
+									</div>
 									<button class="btn btn-lg btn-dark btn-block mb-1"
 										type="submit">Register User</button>
-
 								</form>
 							</div>
 						</div>
