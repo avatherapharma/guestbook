@@ -73,13 +73,15 @@ user.setStatus("success");
 		if (user.getRole().equals("guest")&&user.getStatus().equals("success")) {
 			logger.info("memberLogin End");
 			UserEntry usernetry = new UserEntry();
+			usernetry.setUser(user.getUserName());
 			model.addAttribute("userEntry", usernetry);
+			model.addAttribute("user", user);
 			return "user.html";
 
 		}  else if (user.getRole().equals("admin")&&user.getStatus().equals("success")) {
 
 			model.addAttribute("entrylist", userServ.pendingadminentrys());
-
+			model.addAttribute("userEntry", new UserEntry());
 			logger.info("memberLogin End");
 
 			return "admin.html";
@@ -110,12 +112,12 @@ user.setStatus("success");
 	}
 
 	@PostMapping("/guestEntrySubmit")
-	public String guestAddEntry(@ModelAttribute UserEntry userEntry,@ModelAttribute UserData data,UserModel user, Model model) {
+	public String guestAddEntry(@ModelAttribute UserEntry userEntry, UserData data,UserModel user, Model model) {
 		logger.info("guestAddEntry ");
-		userEntry.setUser(user.getUserName());
+		//userEntry.setUser(user.getUserName());
 		model.addAttribute("userEntry", userServ.addUserEntry(userEntry));
 		data.setStatus("suucess");
-		model.addAttribute("user", data);
+		model.addAttribute("user", user);
 		
 		logger.info("guestAddEntry End");
 		return "user.html";

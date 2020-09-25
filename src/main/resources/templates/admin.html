@@ -54,11 +54,13 @@
 			</thead>
 			<tbody>
 				<tr th:each="entrylist : ${entrylist}">
+<form action="#" th:action="@{/approveentry}" th:object="${userEntry}">
 					<td><span th:text="${entrylist.entry}"> entry </span></td>
 					<td><span th:text="${entrylist.user}"> user </span></td>
 
 					<td><span th:text="${entrylist.id}" th:selected="${entrylist.id}"> id </span></td>
-
+					
+</form>
 
 				</tr>
 			</tbody>

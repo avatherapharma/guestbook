@@ -54,7 +54,10 @@
 			</tr>
 			<td><input type="submit" class="btn btn-primary"
 				value="submintEntry" name="save" /></td>
+				    <input type="hidden" th:field="*{user}"/>
+				
 			<p th:text="'Entry submitted: ' + ${userEntry.status}" />
+			
 		</table>
 		</div>
 
