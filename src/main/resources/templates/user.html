@@ -37,9 +37,15 @@
 			</ul>
 		</div>
 	</nav>
+			<div class="row justify-content-sm-center">
+			<div class="col-sm-10 col-md-6">
+				<div class="card border-info">
+	
 	<h1>User entry Screen</h1>
+	
 	<form action="#" th:action="@{/guestEntrySubmit}"
 		th:object="${userEntry}" method="post">
+	<div class="form-group">
 		<table>
 			<td>Input Entry:</td>
 			<tr>
@@ -50,43 +56,22 @@
 				value="submintEntry" name="save" /></td>
 			<p th:text="'Entry submitted: ' + ${userEntry.status}" />
 		</table>
+		</div>
+
 	</form>
 
-
-	<section class="my-5">
-
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 mx-auto">
-
-
-
-
-
-
-					<h2>Upload Image</h2>
-					<p th:text="${message}" th:if="${message ne null}"
-						class="alert alert-primary"></p>
-					<form method="post" th:action="@{/upload}"
+			<form method="post" th:action="@{/upload}"
 						enctype="multipart/form-data">
 						<div class="form-group">
-							<p>
-								entry: <input type="text" th:text="*{entry}">
-							</p>
-							<button type="submit" class="btn btn-primary">submit
-								enytry</button>
 
 							<input type="file" name="file" class="form-control-file">
 						</div>
 						<button type="submit" class="btn btn-primary">Upload File</button>
 					</form>
-					<!--        <p th:text="'Image Uploaded: ' + ${user.status}" />
- -->
-				</div>
-			</div>
-		</div>
-	</section>
 
+</div>
+</div>
+</div>
 	<div class="jumbotron text-center" style="margin-bottom: 0">
 		<p>Footer @GuestBook 2020</p>
 	</div>

@@ -39,7 +39,9 @@ public class GuestBookController {
 	@RequestMapping(path = "/")
 	public String index(Model model) {
 		logger.info("index");
-		model.addAttribute("user", new UserModel());
+		UserModel user=  new UserModel();
+user.setStatus("success");
+		model.addAttribute("user", user);
 		return "index";
 
 	}
@@ -118,7 +120,7 @@ public class GuestBookController {
 
 	@PostMapping("/upload")
 	public String uploadFile(@RequestParam("file") MultipartFile file, Model model, RedirectAttributes attributes,
-			UserData data) {
+			UserData data ,@ModelAttribute UserEntry userEntry) {
 
 		// check if file is empty
 		if (file.isEmpty()) {
