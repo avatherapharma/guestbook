@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,6 +84,8 @@ user.setStatus("success");
 
 			model.addAttribute("entrylist", userServ.pendingadminentrys());
 			model.addAttribute("userEntry", new UserEntry());
+Map<String,String> map= new HashMap<>();
+model.addAttribute("map",map);
 			logger.info("memberLogin End");
 
 			return "admin.html";
@@ -94,7 +98,7 @@ user.setStatus("success");
 	}
 
 	@PostMapping("/approveentry")
-	public String adminApproveEntrys(@ModelAttribute UserEntry entry,ArrayList<String> selectedID, Model model) {
+	public String adminApproveEntrys(@ModelAttribute UserEntry entry,HashMap<String, String> map,String selectedID, Model model) {
 		logger.info("approve ");
 		model.addAttribute("user", userServ.approveEntry(entry));
 		logger.info("approve End");
