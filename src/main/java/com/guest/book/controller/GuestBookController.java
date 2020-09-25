@@ -121,7 +121,7 @@ user.setStatus("success");
 		return "user.html";
 	}
 
-	@PostMapping("/upload")
+	@PostMapping("/guestFileuploadEntry")
 	public String uploadFile(@RequestParam("file") MultipartFile file, Model model, RedirectAttributes attributes,
 			UserData data ,@ModelAttribute UserEntry userEntry) {
 
