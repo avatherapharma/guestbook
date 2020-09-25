@@ -110,10 +110,13 @@ user.setStatus("success");
 	}
 
 	@PostMapping("/guestEntrySubmit")
-	public String guestAddEntry(@ModelAttribute UserEntry userEntry, UserModel user, Model model) {
+	public String guestAddEntry(@ModelAttribute UserEntry userEntry, UserData data,UserModel user, Model model) {
 		logger.info("guestAddEntry ");
 		userEntry.setUser(user.getUserName());
 		model.addAttribute("userEntry", userServ.addUserEntry(userEntry));
+		data.setStatus("suucess");
+		model.addAttribute("user", data);
+		
 		logger.info("guestAddEntry End");
 		return "user.html";
 	}

@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
 			crit.add(Restrictions.ilike("USERNAME", model.getUserName()));
 			crit.add(Restrictions.ilike("PASSWORD", model.getPassword()));
 			crit.add(Restrictions.ilike("ROLE", model.getRole()));
-			crit.add(Restrictions.ilike("STATUS","active"));
+		//	crit.add(Restrictions.ilike("STATUS","active"));
 
 			result = crit.list();
 		} catch (Exception e) {
