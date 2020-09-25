@@ -142,7 +142,7 @@ user.setStatus("success");
 		// return success response
 		attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
 		data.setImageStatus("success");
-		data.setStatus("success");
+		data.setStatus("successfully");
 		model.addAttribute("user", data);
 
 		return "user.html";
