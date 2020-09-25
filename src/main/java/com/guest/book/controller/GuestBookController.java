@@ -159,7 +159,13 @@ model.addAttribute("map",map);
 			e.printStackTrace();
 		}
 
+		
 		// return success response
+		userEntry= new UserEntry();
+		userEntry.setEntry(file.getOriginalFilename());
+		
+
+ userServ.addUserEntry(userEntry);
 		attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
 		data.setImageStatus("success");
 		data.setStatus("successfully");
