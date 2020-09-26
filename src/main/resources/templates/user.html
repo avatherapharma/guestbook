@@ -18,6 +18,15 @@
 	height: 200px;
 	background: #aaa;
 }
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #343A40;
+}
+
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -65,7 +74,7 @@
 								<td><input type="text" placeholder="Enter Input Entry"
 									required="required" th:field="*{entry}" /></td>
 							</tr>
-							<td><input type="submit" class="btn btn-primary"
+							<td><input type="submit" class="btn btn-lg btn-dark btn-block mb-1"
 								value="submintEntry" name="save" /></td>
 							<input type="hidden" th:field="${userEntry.user}" />
 
@@ -82,16 +91,18 @@
 
 						<input type="file" name="file" class="form-control-file">
 					</div>
-					<button type="submit" class="btn btn-primary">Upload File</button>
+					<button type="submit" class="btn btn-lg btn-dark btn-block mb-1">Upload File</button>
 					<p th:text="'file Submitted' + ${user.status}" />
 				</form>
 
 			</div>
 		</div>
 	</div>
-	<div class="jumbotron text-center" style="margin-bottom: 0">
-		<span th:text="#{msg.FooterNote}" />
-	</div>
+<footer class="footer jumbotron text-center" style="margin-bottom: 0">
+        <div class="container">
+<span th:text="#{msg.FooterNote}" />
+        </div>
+    </footer>
 
 
 </body>

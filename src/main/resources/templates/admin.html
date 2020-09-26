@@ -16,6 +16,15 @@
 	height: 200px;
 	background: #aaa;
 }
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #343A40;
+}
+
 </style>
 
 
@@ -69,10 +78,11 @@
       </table>
       <button type="submit" value="submit" class="btn btn-success">Submit</button>
    </form>
-
-	<div class="jumbotron text-center" style="margin-bottom: 0">
-		<span th:text="#{msg.FooterNote}" />
-	</div>
+<footer class="footer jumbotron text-center" style="margin-bottom: 0">
+        <div class="container">
+<span th:text="#{msg.FooterNote}" />
+        </div>
+    </footer>
 
 
 </body>

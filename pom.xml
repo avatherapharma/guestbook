@@ -10,12 +10,12 @@
 		<version>2.3.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.testing</groupId>
-	<artifactId>h2databse</artifactId>
+	<groupId>com.guest.book</groupId>
+	<artifactId>guest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>h2databse</name>
-	<description>testing</description>
+	<name>guest book</name>
+	<description>guest book</description>
 
 	<properties>
 		<java.version>1.8</java.version>
