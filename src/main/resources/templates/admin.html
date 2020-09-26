@@ -44,32 +44,32 @@
 	<h1>
 		<span th:text="#{msg.AdminPage}" />
 	</h1>
-	<form action="#" th:action="@{/approveentry}" th:object="${id}"
-		method="post">
 
-		<table>
-			<thead>
-				<tr>
-					<th>entry</th>
-					<th>user</th>
-					<th>id</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="entrylist : ${entrylist}">
-						<td><span th:text="${entrylist.entry}"> entry </span></td>
-						<td><span th:text="${entrylist.user}"> user </span></td>
-						<td><span th:text="${entrylist.id}"> id</span></td>
-			<td>
-          <input type="checkbox"  th:value="${entrylist.id}" />
-        </td>
-			
-				</tr>
-			</tbody>
-		</table>
-		<p>
-			<input type="submit" value="Submit" />
-	</form>
+
+<form action="#" th:action="@{/approveentry}" th:object="${wrapper}" method="post">
+
+      <table class="table table-bordered table-hover table-striped">
+         <thead>
+            <tr>
+               <th>Select</th>
+               <th>ID</th>
+               <th>USER</th>
+               <th>Entry</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr th:each="entrylist, stat : ${wrapper.clientList}">
+               <td><input type="checkbox" th:name="|entrylist[${stat.index}].id|"
+                  th:value="${entrylist.getId()}" th:checked="${entrylist}" /></td>
+               <td th:text="${entrylist.getId()}"></td>
+               <td th:text="${entrylist.getUser()}"></td>
+               <td th:text="${entrylist.getEntry()}"></td>
+            </tr>
+         </tbody>
+      </table>
+      <button type="submit" value="submit" class="btn btn-success">Submit</button>
+   </form>
+
 	<div class="jumbotron text-center" style="margin-bottom: 0">
 		<span th:text="#{msg.FooterNote}" />
 	</div>

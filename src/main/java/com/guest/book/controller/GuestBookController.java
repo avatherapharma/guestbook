@@ -6,9 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.guest.book.model.IDDetails;
+import com.guest.book.model.ClientWithSelection;
+import com.guest.book.model.ClientWithSelectionListWrapper;
 import com.guest.book.model.UserData;
 import com.guest.book.model.UserEntry;
 import com.guest.book.model.UserModel;
@@ -40,6 +39,8 @@ public class GuestBookController {
 	@Autowired
 	UserService userServ;
 
+
+	 
 	@RequestMapping(path = "/")
 	public String index(Model model) {
 		logger.info("index");
@@ -97,7 +98,9 @@ user.setStatus("success");
 
 			model.addAttribute("entrylist", userServ.pendingadminentrys());
 			model.addAttribute("entryModel", new UserEntry());
-
+			ClientWithSelectionListWrapper wrapper = new ClientWithSelectionListWrapper();
+		      wrapper.setClientList(userServ.pendingadminentrys());
+		      model.addAttribute("wrapper", wrapper);
 			logger.info("memberLogin End");
 
 			return "admin.html";
@@ -110,7 +113,7 @@ user.setStatus("success");
 	}
 
 	@PostMapping("/approveentry")
-	public String adminApproveEntrys(@ModelAttribute List<UserEntry> userList,UserEntry entryModel, Model model) {
+	public String adminApproveEntrys(@ModelAttribute List<UserEntry> userList,ClientWithSelectionListWrapper wrapper, UserEntry entryModel, Model model) {
 		logger.info("approve ");
 	
 		UserEntry	entry=userList.get(0);
