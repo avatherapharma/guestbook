@@ -60,7 +60,7 @@
          <tbody>
             <tr th:each="entrylist, stat : ${wrapper.clientList}">
                <td><input type="checkbox" th:name="|entrylist[${stat.index}].id|"
-                  th:value="${entrylist.getId()}" th:checked="${entrylist}" /></td>
+                  th:value="${entrylist.getId()}"  /></td>
                <td th:text="${entrylist.getId()}"></td>
                <td th:text="${entrylist.getUser()}"></td>
                <td th:text="${entrylist.getEntry()}"></td>

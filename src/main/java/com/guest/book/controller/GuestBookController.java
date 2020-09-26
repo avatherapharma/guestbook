@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.guest.book.model.ClientWithSelection;
 import com.guest.book.model.ClientWithSelectionListWrapper;
 import com.guest.book.model.UserData;
 import com.guest.book.model.UserEntry;
@@ -101,6 +100,8 @@ user.setStatus("success");
 			ClientWithSelectionListWrapper wrapper = new ClientWithSelectionListWrapper();
 		      wrapper.setClientList(userServ.pendingadminentrys());
 		      model.addAttribute("wrapper", wrapper);
+		   List<String> l=   new ArrayList();
+		      model.addAttribute("ids",l);
 			logger.info("memberLogin End");
 
 			return "admin.html";
@@ -113,11 +114,11 @@ user.setStatus("success");
 	}
 
 	@PostMapping("/approveentry")
-	public String adminApproveEntrys(@ModelAttribute List<UserEntry> userList,ClientWithSelectionListWrapper wrapper, UserEntry entryModel, Model model) {
+	public String adminApproveEntrys(@ModelAttribute ArrayList<String> ids,ClientWithSelectionListWrapper wrapper, UserEntry entryModel, Model model) {
 		logger.info("approve ");
 	
-		UserEntry	entry=userList.get(0);
-		model.addAttribute("user", userServ.approveEntry(entry));
+	//	UserEntry	entry=userList.get(0);
+		model.addAttribute("user", userServ.approveEntry(entryModel));
 		logger.info("approve End");
 		return "admin.html";
 	}
