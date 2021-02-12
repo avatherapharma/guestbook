@@ -2,7 +2,7 @@
 <!DOCTYPE xml>
 <configuration>
  
- 	<property name="LOGS" value="D:\\logs\\" />
+ 	<property name="LOGS" value="E:\\logs\\" />
 
     <appender name="Console"
         class="ch.qos.logback.core.ConsoleAppender">
