@@ -1,0 +1,8 @@
+plugin 
+Caused: java.io.IOException: Failed to download from
+ https://updates.jenkins.io/download/plugins/workflow-cps-global-lib/2.18/workflow-cps-global-lib.hpi
+ (redirected to: https://fallback.get.jenkins.io/plugins/workflow-cps-global-lib/2.18/workflow-cps-global-lib.hpi)
+ 
+
+groovy
+
